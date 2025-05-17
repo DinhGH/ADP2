@@ -1,3 +1,4 @@
+import SortModel from './SortModel';
 
 
 function App() {
