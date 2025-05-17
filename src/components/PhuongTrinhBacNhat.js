@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 
-function MaxOfTwo() {
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
+function LinearEquation() {
+  const [a, setA] = useState('');
+  const [b, setB] = useState('');
   const [result, setResult] = useState(null);
 
   const handleSubmit = () => {
-    const num1 = Number(input1.trim());
-    const num2 = Number(input2.trim());
+    const numA = Number(a.trim());
+    const numB = Number(b.trim());
 
-    if (isNaN(num1) || isNaN(num2)) {
-      setResult('invalid');
+    if (isNaN(numA) || isNaN(numB)) {
+      setResult('Vui lòng nhập số hợp lệ');
+      return;
+    }
+
+    if (numA === 0) {
+      setResult(numB === 0 ? 'Phương trình vô số nghiệm' : 'Phương trình vô nghiệm');
     } else {
-      setResult(Math.max(num1, num2));
+      const x = -numB / numA;
+      setResult(`Nghiệm x = ${x}`);
     }
   };
 
@@ -35,38 +41,40 @@ function MaxOfTwo() {
       borderRadius: '5px',
       cursor: 'pointer'
     },
-    result: { marginTop: '20px', fontSize: '18px', color: '#333' }
+    result: {
+      marginTop: '15px',
+      fontSize: '18px',
+      color: '#333'
+    }
   };
 
   return (
     <div style={styles.container}>
-      <h2>Tìm số lớn nhất trong 2 số</h2>
+      <h2>Giải phương trình bậc nhất ax + b = 0</h2>
       <input
         type="text"
-        placeholder="Số thứ nhất"
-        value={input1}
-        onChange={(e) => setInput1(e.target.value)}
+        placeholder="Nhập a"
+        value={a}
+        onChange={(e) => setA(e.target.value)}
         style={styles.input}
       />
       <input
         type="text"
-        placeholder="Số thứ hai"
-        value={input2}
-        onChange={(e) => setInput2(e.target.value)}
+        placeholder="Nhập b"
+        value={b}
+        onChange={(e) => setB(e.target.value)}
         style={styles.input}
       />
       <br />
       <button onClick={handleSubmit} style={styles.button}>
-        Tìm số lớn nhất
+        Giải phương trình
       </button>
 
       {result !== null && (
-        <div style={styles.result}>
-          {result === 'invalid' ? 'Vui lòng nhập số hợp lệ' : `Kết quả: ${result}`}
-        </div>
+        <div style={styles.result}>{result}</div>
       )}
     </div>
   );
 }
 
-export default MaxOfTwo;
+
