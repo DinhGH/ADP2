@@ -1,4 +1,8 @@
+
+import SortModel from './SortModel';
+
 import React, { useState } from 'react';
+
 
 import DescOrderModal from './components/DescOrderModal';
 import GcdModal from './components/GcdModal';
